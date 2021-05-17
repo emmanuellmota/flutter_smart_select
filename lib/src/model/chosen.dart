@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'choice_item.dart';
 
 /// Function to return a single [S2Choice] from a single `value`
@@ -112,36 +113,25 @@ mixin S2MultiChosenData<T> on S2ChosenData<T> {
   /// Returns an array of `value` of the current [choice]
   @override
   List<T>? get value {
-    return choice != null && choice.length > 0
-        ? choice.map((S2Choice<T> item) => item.value).toList().cast<T>()
-        : [];
+    return choice != null && choice.length > 0 ? choice.map((S2Choice<T> item) => item.value).toList().cast<T>() : [];
   }
 
   /// Returns an array of `title` of the [choice]
   @override
   List<String>? get title {
-    return isNotEmpty
-        ? choice.map((S2Choice<T> item) => item.title).toList().cast<String>()
-        : null;
+    return isNotEmpty ? choice.map((S2Choice<T> item) => item.title).toList().cast<String>() : null;
   }
 
   /// Returns an array of `subtitle` of the [choice]
   @override
   List<String>? get subtitle {
-    return isNotEmpty
-        ? choice
-            .map((S2Choice<T> item) => item.subtitle)
-            .toList()
-            .cast<String>()
-        : null;
+    return isNotEmpty ? choice.map((S2Choice<T> item) => item.subtitle).toList().cast<String>() : null;
   }
 
   /// Returns an array of `group` of the [choice]
   @override
   List<String>? get group {
-    return isNotEmpty
-        ? choice.map((S2Choice<T> item) => item.group).toList().cast<String>()
-        : null;
+    return isNotEmpty ? choice.map((S2Choice<T> item) => item.group).toList().cast<String>() : null;
   }
 
   @override
@@ -179,13 +169,13 @@ mixin S2MultiChosenData<T> on S2ChosenData<T> {
 
 class S2SingleChosen<T> extends S2ChosenData<T> with S2SingleChosenData<T> {
   /// Default constructor
-  S2SingleChosen(S2Choice<T>? choice) : _choice = choice;
+  S2SingleChosen(S2Choice<T?>? choice) : _choice = choice;
 
   /// The choice item
-  final S2Choice<T>? _choice;
+  final S2Choice<T?>? _choice;
 
   @override
-  S2Choice<T>? get choice {
+  S2Choice<T?>? get choice {
     return _choice;
   }
 }
@@ -220,10 +210,10 @@ abstract class S2ChosenNotifier<T> extends ChangeNotifier with S2ChosenData<T> {
   void validate();
 
   /// Validate the selection
-  // void validate() {
-  //   error = validation?.call(choice) ?? '';
-  //   notifyListeners();
-  // }
+// void validate() {
+//   error = validation?.call(choice) ?? '';
+//   notifyListeners();
+// }
 }
 
 mixin S2SingleChosenNotifier<T> on S2ChosenNotifier<T> {
@@ -444,9 +434,7 @@ class S2MultiSelected<T> extends S2Selected<T> with S2MultiChosenData<T> {
   /// return an array of `value` of the selected [choice]
   @override
   List<T>? get value {
-    return isNotEmpty
-        ? choice!.map((S2Choice<T> item) => item.value).toList()
-        : _value;
+    return isNotEmpty ? choice!.map((S2Choice<T> item) => item.value).toList() : _value;
   }
 
   @override
@@ -479,7 +467,7 @@ abstract class S2Selection<T> extends S2ChosenNotifier<T> {
 class S2SingleSelection<T> extends S2Selection<T> with S2SingleChosenData<T> {
   /// The initial selection
   @override
-  final S2Choice<T>? initial;
+  final S2Choice<T?>? initial;
 
   /// A function used to validate the selection
   @override
@@ -492,10 +480,10 @@ class S2SingleSelection<T> extends S2Selection<T> with S2SingleChosenData<T> {
   }) : _choice = initial;
 
   /// The choice of the current selection
-  S2Choice<T>? _choice;
+  S2Choice<T?>? _choice;
 
   @override
-  S2Choice<T>? get choice => _choice;
+  S2Choice<T?>? get choice => _choice;
 
   @override
   void validate() {
@@ -504,7 +492,7 @@ class S2SingleSelection<T> extends S2Selection<T> with S2SingleChosenData<T> {
   }
 
   @override
-  set choice(S2Choice<T>? val) {
+  set choice(S2Choice<T?>? val) {
     _choice = val;
     validate();
   }
