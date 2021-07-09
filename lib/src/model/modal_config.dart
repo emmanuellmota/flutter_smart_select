@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import './modal_theme.dart';
 
 /// Custom modal function
-typedef CustomModal = Future<bool> Function(BuildContext context, Widget modal, bool isDismissible, bool enableDrag);
+typedef CustomModal = Future<dynamic> Function(BuildContext context, Widget modal, bool isDismissible, bool enableDrag);
 
 /// Target to open choices list
 enum S2ModalType {
