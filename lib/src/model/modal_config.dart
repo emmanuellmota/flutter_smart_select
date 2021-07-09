@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import './modal_theme.dart';
 
+/// Custom modal function
+typedef CustomModal = Future<bool> Function(BuildContext context, Widget modal, bool isDismissible, bool enableDrag);
+
 /// Target to open choices list
 enum S2ModalType {
   /// open in full page
@@ -13,6 +16,9 @@ enum S2ModalType {
 
   /// open in sliding bottom sheet
   bottomSheet,
+
+  // open in custom modal
+  custom,
 }
 
 /// Modal configuration
@@ -79,6 +85,8 @@ class S2ModalConfig with Diagnosticable {
   /// Configure modal header style
   final S2ModalHeaderStyle headerStyle;
 
+  final CustomModal? customModal;
+
   /// Create modal configuration
   const S2ModalConfig({
     this.type = S2ModalType.fullPage,
@@ -100,6 +108,7 @@ class S2ModalConfig with Diagnosticable {
     this.barrierColor,
     this.style = const S2ModalStyle(),
     this.headerStyle = const S2ModalHeaderStyle(),
+    this.customModal,
   }) : assert(maxHeightFactor > 0 && maxHeightFactor <= 1);
 
   /// Returns true if the modal type is full page
@@ -110,6 +119,9 @@ class S2ModalConfig with Diagnosticable {
 
   /// Returns true if the modal type is popup dialog
   bool get isPopupDialog => type == S2ModalType.popupDialog;
+
+  /// Returns true if the modal type is custom
+  bool get isCustomModal => type == S2ModalType.custom;
 
   /// Returns true if the confirm button brightness is dark
   bool get confirmIsDark => confirmBrightness == Brightness.dark;
@@ -139,6 +151,7 @@ class S2ModalConfig with Diagnosticable {
     Color? barrierColor,
     S2ModalStyle? style,
     S2ModalHeaderStyle? headerStyle,
+    CustomModal? customModal,
   }) {
     return S2ModalConfig(
       type: type ?? this.type,
@@ -159,9 +172,8 @@ class S2ModalConfig with Diagnosticable {
       barrierDismissible: barrierDismissible ?? this.barrierDismissible,
       barrierColor: barrierColor ?? this.barrierColor,
       style: style == null ? this.style : this.style.merge(style),
-      headerStyle: headerStyle == null
-          ? this.headerStyle
-          : this.headerStyle.merge(headerStyle),
+      headerStyle: headerStyle == null ? this.headerStyle : this.headerStyle.merge(headerStyle),
+      customModal: customModal ?? this.customModal,
     );
   }
 
@@ -191,6 +203,7 @@ class S2ModalConfig with Diagnosticable {
       barrierColor: other.barrierColor,
       style: other.style,
       headerStyle: other.headerStyle,
+      customModal: other.customModal,
     );
   }
 }

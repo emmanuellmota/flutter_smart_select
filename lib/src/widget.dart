@@ -430,6 +430,7 @@ class SmartSelect<T> extends StatefulWidget {
     bool? modalFilter,
     bool? modalFilterAuto,
     String? modalFilterHint,
+    CustomModal? customModal,
   }) {
     S2ChoiceConfig defaultChoiceConfig = const S2ChoiceConfig(
       type: S2ChoiceType.radios,
@@ -507,6 +508,7 @@ class SmartSelect<T> extends StatefulWidget {
             useConfirm: modalConfirm,
             style: modalStyle,
             headerStyle: modalHeaderStyle,
+            customModal: customModal,
           ),
     );
   }
@@ -752,6 +754,7 @@ class SmartSelect<T> extends StatefulWidget {
     bool? modalFilter,
     bool? modalFilterAuto,
     String? modalFilterHint,
+    CustomModal? customModal,
   }) {
     S2ChoiceConfig defaultChoiceConfig = const S2ChoiceConfig(
       type: S2ChoiceType.checkboxes,
@@ -1538,6 +1541,9 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
             child: modal,
           ),
         ));
+        break;
+      case S2ModalType.custom:
+        confirmed = await (modalConfig.customModal!(context, modal, modalConfig.barrierDismissible, modalConfig.enableDrag));
         break;
     }
     return confirmed;

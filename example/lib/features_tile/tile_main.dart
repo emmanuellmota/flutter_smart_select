@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartselect/features_tile/tile_custom.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import './tile_one_line.dart';
 import './tile_two_line.dart';
@@ -49,6 +50,12 @@ class FeaturesTile extends StatelessWidget {
             child: StickyHeader(
               header: const FeaturesHeader('Validation'),
               content: FeaturesTileValidation(),
+            ),
+          ),
+          KeepAliveWidget(
+            child: StickyHeader(
+              header: const FeaturesHeader('Custom Modal'),
+              content: FeaturesTileCustom(),
             ),
           ),
         ],
