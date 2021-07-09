@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartselect/features_modal/tile_custom.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import './modal_filter.dart';
 import './modal_confirm.dart';
@@ -56,16 +57,20 @@ class FeaturesModal extends StatelessWidget {
           ),
           KeepAliveWidget(
             child: StickyHeader(
-              header:
-                  const FeaturesHeader('Custom Modal Header & Footer Widget'),
+              header: const FeaturesHeader('Custom Modal Header & Footer Widget'),
               content: FeaturesModalWidget(),
             ),
           ),
           KeepAliveWidget(
             child: StickyHeader(
-              header:
-                  const FeaturesHeader('Only Choices, Without Header & Footer'),
+              header: const FeaturesHeader('Only Choices, Without Header & Footer'),
               content: FeaturesModalChoices(),
+            ),
+          ),
+          KeepAliveWidget(
+            child: StickyHeader(
+              header: const FeaturesHeader('Custom Modal'),
+              content: FeaturesTileCustom(),
             ),
           ),
         ],

@@ -832,6 +832,7 @@ class SmartSelect<T> extends StatefulWidget {
             useConfirm: modalConfirm,
             style: modalStyle,
             headerStyle: modalHeaderStyle,
+            customModal: customModal,
           ),
     );
   }
