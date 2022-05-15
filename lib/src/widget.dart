@@ -1506,7 +1506,7 @@ abstract class S2State<T> extends State<SmartSelect<T>> {
           enableDrag: modalConfig.enableDrag,
           isScrollControlled: true,
           builder: (_) {
-            final MediaQueryData mediaQuery = MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+            final MediaQueryData mediaQuery = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
             final double topObstructions = mediaQuery.viewPadding.top;
             final double bottomObstructions = mediaQuery.viewPadding.bottom;
             final double keyboardHeight = mediaQuery.viewInsets.bottom;

@@ -75,8 +75,7 @@ class _S2TextErrorState extends State<S2TextError> {
   /// Set the [controller] by provider value
   void initController(newController) {
     controller?.dispose();
-    controller = (newController ?? defaultController)
-      ..addListener(() => setState(() {}));
+    controller = (newController ?? defaultController)..addListener(() => setState(() {}));
   }
 
   @override
@@ -96,7 +95,7 @@ class _S2TextErrorState extends State<S2TextError> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       initController(widget.controller);
     });
   }
@@ -125,9 +124,7 @@ class _S2TextErrorState extends State<S2TextError> {
       firstCurve: const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
       secondCurve: const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
       sizeCurve: Curves.fastOutSlowIn,
-      crossFadeState: controller?.visibled == true
-          ? CrossFadeState.showSecond
-          : CrossFadeState.showFirst,
+      crossFadeState: controller?.visibled == true ? CrossFadeState.showSecond : CrossFadeState.showFirst,
     );
   }
 
